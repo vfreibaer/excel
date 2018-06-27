@@ -12,6 +12,11 @@ import javax.swing.UnsupportedLookAndFeelException;
 import sun.swing.FilePane;
 
 public class JSystemFileChooser extends JFileChooser {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 236430778641678564L;
+
 	@Override
 	public void updateUI() {
 		LookAndFeel old = UIManager.getLookAndFeel();

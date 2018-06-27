@@ -11,18 +11,64 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<poi.version>3.17</poi.version>
+     	<poiji.version>1.11</poiji.version>
 	</properties>
+	
 
 	<build>
 		<plugins>
+		
+			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-jar-plugin</artifactId>
+			    <configuration>
+			      <archive>
+			        <manifest>
+			          <addClasspath>true</addClasspath>
+			          <mainClass>de.freibaer.excel.App</mainClass>
+			        </manifest>
+			      </archive>
+			    </configuration>
+		  	</plugin>
+  
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.2</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<!-- get all project dependencies -->
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<!-- MainClass in mainfest make a executable jar -->
+					<archive>
+					  <manifest>
+						<mainClass>de.freibaer.excel.App</mainClass>
+					  </manifest>
+					</archive>
+
+				</configuration>
+				<executions>
+				  <execution>
+					<id>make-assembly</id>
+                                        <!-- bind to the packaging phase -->
+					<phase>package</phase> 
+					<goals>
+						<goal>single</goal>
+					</goals>
+				  </execution>
+				</executions>
 			</plugin>
 
 			<plugin>
@@ -46,7 +92,7 @@
 								<preCp>anything</preCp>
 							</classPath>
 							<jre>
-								<minVersion>1.8.0</minVersion>
+								<minVersion>1.7.0</minVersion>
 								<jdkPreference>preferJre</jdkPreference>
 							</jre>
 							<versionInfo>
@@ -91,11 +137,32 @@
 		    <version>2.6</version>
 		</dependency>
 		
+<!-- 		<dependency> -->
+<!-- 		    <groupId>com.itextpdf</groupId> -->
+<!-- 		    <artifactId>itextpdf</artifactId> -->
+<!-- 		    <version>5.5.13</version> -->
+<!-- 		</dependency> -->
+		
 		<dependency>
-		    <groupId>com.itextpdf</groupId>
-		    <artifactId>itextpdf</artifactId>
-		    <version>5.5.13</version>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${poi.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
+      	<dependency>
+			<groupId>com.github.ozlerhakan</groupId>
+			<artifactId>poiji</artifactId>
+			<version>${poiji.version}</version>
+		</dependency>
+	   	<dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.7</version>
+        </dependency>
 
 <!-- 		<dependency> -->
 <!-- 			<groupId>junit</groupId> -->
